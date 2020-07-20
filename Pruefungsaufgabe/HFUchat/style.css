@@ -26,8 +26,8 @@ body {
 
 .textChatIcon {
     position: relative;
-    top: -50px;
-    left: 450px;
+    top: -135px;
+    left: 455px;
     transform: translate(-50%, -50%);
     font-size: 80px;
     color: white;
@@ -41,20 +41,27 @@ body {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 50%;
     font-size: 25px;
+    position: relative;
+    left: 95px;
   }
   
   button:hover {
     opacity: 0.8;
   }
 
-  .benutzername {
+  input[type=text], input[type=password] {
     border-radius: 10px;
-    background-color: grey;
+    background-color: rgb(182, 182, 182);
     color: rgb(0, 0, 0);
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     width: 90%;
+  }
+
+  h1{
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    color: #474747;
   }
