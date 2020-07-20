@@ -32,3 +32,29 @@ body {
     font-size: 80px;
     color: white;
   }
+
+  button {
+    border-radius: 35px;
+    background-color: #474747;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 25px;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+
+  .benutzername {
+    border-radius: 10px;
+    background-color: grey;
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    width: 90%;
+  }
