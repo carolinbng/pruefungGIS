@@ -1,0 +1,18 @@
+body {
+    background-color: grey;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+}
+
+#login {
+    border-radius: 35px;
+    background-color: white;
+    padding: 30px;
+    width: 400px;
+    height: 250px;
+    position: fixed;
+    top: 300px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+}
+  
