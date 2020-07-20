@@ -8,11 +8,18 @@ body {
     background-color: white;
     padding: 30px;
     width: 400px;
-    height: 250px;
+    height: 400px;
     position: fixed;
-    top: 300px;
+    top: 250px;
     left: -9999px;
     right: -9999px;
     margin: auto;
 }
-  
+
+.Icon{
+    position: fixed;
+    top: 80px;
+    left: 700px;
+    right: -9999px;
+    margin: auto;
+}
