@@ -16,10 +16,19 @@ body {
     margin: auto;
 }
 
-.Icon{
+.chatIcon{
     position: fixed;
     top: 80px;
     left: 700px;
     right: -9999px;
     margin: auto;
 }
+
+.textChatIcon {
+    position: relative;
+    top: -50px;
+    left: 450px;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    color: white;
+  }
