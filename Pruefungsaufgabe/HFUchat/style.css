@@ -1,10 +1,10 @@
 body {
-    background-color: grey;
+    background-color: rgb(184, 184, 184);
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
 
 #login {
-    border-radius: 35px;
+    border-radius: 80px;
     background-color: white;
     padding: 30px;
     width: 400px;
@@ -53,8 +53,7 @@ body {
 
   input[type=text], input[type=password] {
     border-radius: 10px;
-    background-color: rgb(182, 182, 182);
-    color: rgb(0, 0, 0);
+    background-color: rgb(212, 212, 212);
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
