@@ -1,0 +1,61 @@
+body {
+    background-color: rgb(184, 184, 184);
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    text-align: center;
+}
+
+input[type=text] {
+    border: none;
+    border-bottom: 2px solid rgb(148, 148, 148);
+    background: none;
+    position: relative;
+    top: 10px;
+    font-size: 20px;
+  }
+
+h1{
+    font-size: 40px;
+    position: relative;
+    top: 100px;
+}
+
+p{
+    font-size: 18px;
+    position: relative;
+    top: 95px;
+}
+
+a{
+    color: black;
+}
+
+button {
+    border-radius: 35px;
+    background-color: #ffffff;
+    color: rgb(87, 87, 87);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    font-size: 25px;
+    text-align: center;
+    position: relative;
+    top: 20px;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+ 
+  div {
+    border-radius: 5px;
+    padding: 20px;
+    position: relative;
+    top: 100px;
+    font-size: 20px;
+  }
+
+  .btn-register {
+      padding-top: 20px;
+  }
