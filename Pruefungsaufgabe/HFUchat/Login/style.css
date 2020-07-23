@@ -8,6 +8,7 @@ body {
     background-color: white;
     padding: 30px;
     width: 400px;
+    height: 400px;
     position: fixed;
     top: 250px;
     left: -9999px;
