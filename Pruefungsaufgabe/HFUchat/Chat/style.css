@@ -153,5 +153,27 @@ top: 670px;
   top: 650px;
   left: 450px; 
   width: 67%;
-  height: 120px;
+  height: 110px;
+  border-radius: 100px;
+}
+
+.navtop{
+  background-color: white;
+  position: absolute;
+  top: 10px;
+  left: 450px; 
+  width: 67%;
+  height: 50px;
+  border-radius: 100px;
+}
+
+.textnachricht{
+  width: 65%;
+  height: 80px;
+  border: none;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  font-size: 20px;
+  position: relative;
+  left: 100px;
+  top: 10px;
 }
