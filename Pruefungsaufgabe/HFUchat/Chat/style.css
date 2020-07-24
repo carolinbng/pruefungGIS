@@ -6,7 +6,7 @@ body {
 
 .sidenav {
     height: 100%;
-    width: 300px;
+    width: 150px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -32,17 +32,36 @@ body {
   height: 100%;
   background-color: white;
   position: relative;
-  left: 100%;
+  left: 100px;
 }
   
 .chatIcon {
   padding: 50px;
-  position: relative;
+  position: fixed;
   top: 50px;
+  left: -160px;
 }
 
 .exitIcon{
   padding: 50px;
-  position: relative;
-  top: 420px;
+  position: fixed;
+  top: 620px;
+  left: -160px;
+}
+
+input[type=text]{
+  position: fixed;
+  left: 180px;
+  border-radius: 20px;
+  width: 200px;
+  height: 30px;
+  border-radius: 35px;
+  background-color: #474747;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  font-size: 20px;
 }
