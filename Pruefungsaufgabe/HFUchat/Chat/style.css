@@ -64,7 +64,7 @@ input[type=text]{
   height: 30px;
   border-radius: 35px;
   background-color: #ffffff;
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -147,4 +147,9 @@ top: 670px;
 }
 
 
-
+.navbottom{
+  background-color: white;
+  position: relative;
+  top: 10px;
+  left: 20px; 
+}
