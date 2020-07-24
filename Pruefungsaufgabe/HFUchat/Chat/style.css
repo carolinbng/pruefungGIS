@@ -96,19 +96,22 @@ top: 670px;
 
 /* Chat containers */
 .container {
-  border: 2px solid #dedede;
-  background-color: #f1f1f1;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
-  width: 100px;
+  width: 500px;
+  
   
 }
 
 /* Darker chat container */
 .darker {
-  border-color: #ccc;
-  background-color: #ddd;
+  border-color: rgb(93, 166, 172);
+  background-color: rgb(93, 166, 172);
+  position: relative;
+  left: 300px;
 }
 
 /* Clear floats */
@@ -137,19 +140,27 @@ top: 670px;
 /* Style time text */
 .time-right {
   float: right;
-  color: #aaa;
+  color: rgb(0, 0, 0);
 }
 
 /* Style time text */
 .time-left {
-  float: left;
-  color: #999;
+  float: right;
+  color: rgb(0, 0, 0);
 }
 
+.navmiddle{
+  position: fixed;
+  left: 500px;
+  background-color: rgb(184, 184, 184);
+  width: 800px;
+  height: 550px;
+  top: 80px;
+}
 
 .navbottom{
   background-color: white;
-  position: absolute;
+  position: fixed;
   top: 650px;
   left: 450px; 
   width: 67%;
@@ -158,8 +169,8 @@ top: 670px;
 
 .navtop{
   background-color: white;
-  position: absolute;
-  top: 10px;
+  position: fixed;
+  top: 0px;
   left: 450px; 
   width: 67%;
   height: 50px;
