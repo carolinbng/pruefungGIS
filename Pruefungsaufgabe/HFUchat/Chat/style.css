@@ -149,7 +149,9 @@ top: 670px;
 
 .navbottom{
   background-color: white;
-  position: relative;
-  top: 10px;
-  left: 20px; 
+  position: absolute;
+  top: 650px;
+  left: 450px; 
+  width: 67%;
+  height: 120px;
 }
