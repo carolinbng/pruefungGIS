@@ -9,20 +9,19 @@ input[type=text] {
     border-bottom: 2px solid rgb(148, 148, 148);
     background: none;
     position: relative;
-    top: 10px;
+    top: -10px;
     font-size: 20px;
+    margin: 15px;
   }
 
 h1{
     font-size: 40px;
-    position: relative;
-    top: 100px;
+   
 }
 
 p{
     font-size: 18px;
-    position: relative;
-    top: 95px;
+ 
 }
 
 a{
@@ -51,8 +50,7 @@ button {
   div {
     border-radius: 5px;
     padding: 20px;
-    position: relative;
-    top: 100px;
+    
     font-size: 20px;
   }
 
