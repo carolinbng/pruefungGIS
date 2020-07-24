@@ -183,8 +183,8 @@ top: 670px;
   font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   font-size: 20px;
   position: relative;
-  left: 100px;
-  top: 10px;
+  left: 0px;
+  top: 20px;
 }
 
 .navbottom img{
