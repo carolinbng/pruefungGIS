@@ -30,11 +30,12 @@ body {
 
 .sidenav2{
   height: 100%;
-  background-color: white;
+  background-color: rgb(93, 166, 172);
   position: fixed;
   left: 150px;
   width: 300px;
-  margin-top: auto;
+  margin-top: inherit;
+  top:-8px;
 }
   
 .chatIcon {
@@ -51,6 +52,10 @@ body {
   left: -160px;
 }
 
+.exitIcon a:hover{
+  opacity: 0.3;
+}
+
 input[type=text]{
   position: fixed;
   left: 175px;
@@ -58,7 +63,7 @@ input[type=text]{
   width: 200px;
   height: 30px;
   border-radius: 35px;
-  background-color: #474747;
+  background-color: #ffffff;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -67,3 +72,79 @@ input[type=text]{
   width: 15%;
   font-size: 20px;
 }
+
+.editGroup{
+position: relative;
+left: 60px;
+top: 670px;
+}
+
+.editGroup a:hover{
+  opacity: 0.3;
+}
+
+.editPerson{
+  position: relative;
+  left: 160px;
+  top: 611px;
+}
+
+.editPerson a:hover{
+  opacity: 0.3;
+}
+
+
+/* Chat containers */
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 100px;
+  
+}
+
+/* Darker chat container */
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+/* Clear floats */
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Style images */
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+/* Style the right image */
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+/* Style time text */
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+/* Style time text */
+.time-left {
+  float: left;
+  color: #999;
+}
+
+
+
