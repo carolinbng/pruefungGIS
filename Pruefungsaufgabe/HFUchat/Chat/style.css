@@ -161,7 +161,7 @@ top: 670px;
 .navbottom{
   background-color: white;
   position: fixed;
-  top: 650px;
+  top: 660px;
   left: 450px; 
   width: 67%;
   height: 110px;
@@ -170,10 +170,11 @@ top: 670px;
 .navtop{
   background-color: white;
   position: fixed;
-  top: 0px;
-  left: 450px; 
-  width: 67%;
+  top: 10px;
+  left: 500px; 
+  width: 60%;
   height: 50px;
+  border-radius: 40px;
 }
 
 .textnachricht{
