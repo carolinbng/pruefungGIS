@@ -154,7 +154,6 @@ top: 670px;
   left: 450px; 
   width: 67%;
   height: 110px;
-  border-radius: 100px;
 }
 
 .navtop{
@@ -164,7 +163,6 @@ top: 670px;
   left: 450px; 
   width: 67%;
   height: 50px;
-  border-radius: 100px;
 }
 
 .textnachricht{
@@ -176,4 +174,13 @@ top: 670px;
   position: relative;
   left: 100px;
   top: 10px;
+}
+
+.navbottom img{
+  position: relative;
+  left: 800px;
+}
+
+.navbottom img a:hover{
+  opacity: 0.3;
 }
