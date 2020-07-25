@@ -38,6 +38,13 @@ body {
   top:-8px;
 }
   
+.containerChat{
+  color: rgba(255, 255, 255, 0.473);
+  position: fixed;
+}
+
+
+
 .chatIcon {
   padding: 50px;
   position: fixed;
@@ -171,11 +178,20 @@ top: 670px;
   background-color: white;
   position: fixed;
   top: 10px;
-  left: 500px; 
-  width: 60%;
+  left: 700px; 
+  width: 30%;
   height: 50px;
   border-radius: 40px;
 }
+
+.navtop p{
+  position: relative;
+  left: 115px;
+  color: rgb(93, 166, 172);
+  font-size: 20px;
+  top: -8px;
+}
+
 
 .textnachricht{
   width: 65%;
@@ -196,3 +212,4 @@ top: 670px;
 .navbottom img a:hover{
   opacity: 0.3;
 }
+
