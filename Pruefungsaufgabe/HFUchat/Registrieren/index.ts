@@ -1,9 +1,9 @@
-document.getElementById("submitBtn")?.addEventListener("click", submit);
+document.getElementById("submitBtn")?.addEventListener("click", register);
 //Hängt Formulardaten an URL
-async function submit(): Promise<void> {
+async function register(): Promise<void> {
     let formData: FormData = new FormData(document.forms[0]);
     let url: string = "http://localhost:8100";
-    if (formData.get("passwort") == formData.get("passwortwiederholen")){
+    if (formData.get("passwort") == formData.get("passwortwiederholen")) {
         let query: URLSearchParams = new URLSearchParams(<any>formData);
         url = url + "/register" + "?" + query.toString();
         let serverResponse: Response = await fetch(url);

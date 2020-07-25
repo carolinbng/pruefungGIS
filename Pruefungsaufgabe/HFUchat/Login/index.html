@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel ="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Login</title>
@@ -15,13 +16,14 @@
     <div class="sprechblase"><i class='fas fa-comment' style='font-size:300px;color:rgb(93, 166, 172)'></i></div>
         <div class="textSprechblase">CHAT</div>
 
-        
+        <form>
         <input type="text" placeholder="E-Mail" id="email" name="email" required>
         <br>
         <input type="password" placeholder="Passwort" id="passwort" name="passwort" required>
+        </form>
 
-        <p>Noch kein Konto? Jetzt <a href="">Registrieren</a></p>
-        <a href="#"><button class="btnEinloggen">Einloggen</button></a>
+        <p>Noch kein Konto? Jetzt <a href="../Registrieren/index.html">Registrieren</a></p>
+        <button type="button" id="submitBtn" class="btnEinloggen">Einloggen</button>
 </div>
     
 

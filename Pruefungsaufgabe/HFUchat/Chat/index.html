@@ -15,24 +15,13 @@
 
   <div class="sidenav">
     <div class="chat-icon"><a href="#chat"><img src="img/chat-white-48dp.svg" width="50px"></a></div>
-    <div class="exit-icon"><a href="#exit"><img src="img/exit_to_app-white-48dp.svg" width="50px"></a></div>
+    <div id="logoutBtn" class="exit-icon"><a href="#exit"><img src="img/exit_to_app-white-48dp.svg" width="50px"></a></div>
   </div>
 
 
 
   <div class="sidenav2">
-    <div class="search-container">
-      <form action="/action_page.php">
-        <input type="text" class="input-search" placeholder="Suche.." name="search">
-      </form>
-
-      <div class="containerChat"></div>
-
-
-
       <div class="edit-group"><a href="#"><img src="img/group_add-white-48dp.svg" width="55px"></a></div>
-
-    </div>
   </div>
   </div>
 
@@ -44,6 +33,7 @@
       <button class="navtop">
         <p><b><img src="img/profilbild.png" alt="Profilbild" width="30px"> GIS </b></p>
       </button>
+      <span class="user-name" id="loggedInUser"></span>
     </div>
 
     <div class="chat-container">
@@ -101,8 +91,11 @@
 
    <div class="chat-bottom-container">
     <div class="new-message">
-      <textarea class="text-nachricht" name="subject" placeholder="Nachricht schreiben.."></textarea>
-      <a class="send-icon" href="#"><img src="img/send-black-48dp.svg"></a>
+      <form>
+        <textarea id="message" class="text-nachricht" name="message" placeholder="Nachricht schreiben.."></textarea>
+        <a class="send-icon" id="sendBtn" href="#"><img src="img/send-black-48dp.svg"></a>
+      </form>
+     
     </div>
    </div>
 

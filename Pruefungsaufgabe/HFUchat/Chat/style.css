@@ -35,6 +35,11 @@ body {
   margin-top: inherit;
   top:-8px;
 }
+
+.user-name{
+  color: white;
+  padding: 10px;
+}
   
 .chat-icon {
   margin: 10px;

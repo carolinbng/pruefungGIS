@@ -8,11 +8,15 @@ var ChatServer;
 (function (ChatServer) {
     let dbUrl = "mongodb+srv://test_user:tester2105@chatcluster.1wmam.mongodb.net/ChatDatabase?retryWrites=true&w=majority";
     let userData;
+    let conversationData;
+    let messageData;
     async function connectToDatabase(_url) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
         userData = mongoClient.db("ChatDatabase").collection("Users");
+        conversationData = mongoClient.db("ChatDatabase").collection("Conversations");
+        messageData = mongoClient.db("ChatDatabase").collection("Messages");
         if (userData != undefined) {
             console.log("Datenbank verbunden");
         }
@@ -54,7 +58,7 @@ var ChatServer;
             let userDb = await userData.findOne({ "email": qdata["email"] });
             if (userDb) {
                 if (userDb["passwort"] == qdata["passwort"]) {
-                    let jsonString = JSON.stringify(true);
+                    let jsonString = JSON.stringify(userDb["email"]);
                     _response.write(jsonString);
                 }
                 else {
@@ -66,16 +70,13 @@ var ChatServer;
                 let jsonString = JSON.stringify(false);
                 _response.write(jsonString);
             }
-            let dbDaten = await userData.find().toArray();
-            _response.write(JSON.stringify(dbDaten));
         }
         //Nutzer Registrierung
         else if (q.pathname == "/register") {
             let userDb = await userData.findOne({ "email": qdata["email"] });
             if (!userDb) {
-                console.log("return", email);
-                userData.insertOne(qdata);
                 console.log("Register user", qdata);
+                userData.insertOne(qdata);
                 let jsonString = JSON.stringify(true);
                 _response.write(jsonString);
             }
@@ -83,6 +84,42 @@ var ChatServer;
                 let jsonString = JSON.stringify(false);
                 _response.write(jsonString);
             }
+        }
+        //Aktueller Nutzer daten
+        else if (q.pathname == "/getUserData") {
+            if (qdata["currentUser"]) {
+                let currentUser = qdata["currentUser"].toString();
+                console.log(currentUser);
+                let userDb = await userData.findOne({ "email": currentUser });
+                let jsonString = JSON.stringify(userDb);
+                _response.write(jsonString);
+            }
+            else {
+                let jsonString = JSON.stringify(false);
+                _response.write(jsonString);
+            }
+        }
+        // Alle nutzer zurück geben
+        else if (q.pathname == "/getUsers") {
+            let users = await userData.find().toArray();
+            for (let x of users) {
+                x["passwort"] = "";
+                x["passwortwiederholen"] = "";
+            }
+            console.log(users);
+            let jsonString = JSON.stringify(users);
+            _response.write(jsonString);
+        }
+        //
+        else if (q.pathname == "/sendMessage") {
+            let konversatonId = qdata["konversatonId"].toString();
+            let nachricht = qdata["nachricht"].toString();
+            let currentUser = qdata["currentUser"].toString();
+            qdata["time"] = Date.now().toString();
+            let test = messageData.insert(qdata);
+            console.log(test);
+            let jsonString = JSON.stringify(true);
+            _response.write(jsonString);
         }
         else {
             _response.write("Was geht?");

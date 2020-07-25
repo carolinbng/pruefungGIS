@@ -1,7 +1,7 @@
 "use strict";
-document.getElementById("submitBtn")?.addEventListener("click", submit);
+document.getElementById("submitBtn")?.addEventListener("click", register);
 //Hängt Formulardaten an URL
-async function submit() {
+async function register() {
     let formData = new FormData(document.forms[0]);
     let url = "http://localhost:8100";
     if (formData.get("passwort") == formData.get("passwortwiederholen")) {
