@@ -109,8 +109,10 @@ top: 670px;
   padding: 10px;
   margin: 10px 0;
   width: 500px;
-  
-  
+}
+
+.container h1{
+ font-size: 12px;
 }
 
 /* Darker chat container */
@@ -179,7 +181,7 @@ top: 670px;
   position: fixed;
   top: 10px;
   left: 700px; 
-  width: 30%;
+  width: 20%;
   height: 50px;
   border-radius: 40px;
 }
