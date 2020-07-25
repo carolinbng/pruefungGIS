@@ -6,18 +6,16 @@ body {
 
 .sidenav {
     height: 100%;
-    width: 150px;
+    width: 80px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
     background-color: #474747;
     overflow-x: hidden;
-    padding-top: 20px;
   }
   
   .sidenav a {
-    padding: 6px 8px 6px 160px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
@@ -32,120 +30,88 @@ body {
   height: 100%;
   background-color: rgb(93, 166, 172);
   position: fixed;
-  left: 150px;
-  width: 300px;
+  left: 80px;
+  width: 200px;
   margin-top: inherit;
   top:-8px;
 }
   
-.containerChat{
-  color: rgba(255, 255, 255, 0.473);
-  position: fixed;
-  left: 200px;
+.chat-icon {
+  margin: 10px;
 }
 
-
-
-.chatIcon {
-  padding: 50px;
-  position: fixed;
-  top: 50px;
-  left: -160px;
+.send-icon {
+  position: absolute;
+  margin: 20px;
 }
 
-.exitIcon{
-  padding: 50px;
-  position: fixed;
-  top: 620px;
-  left: -160px;
+.exit-icon{
+  margin: 10px;
+  position: absolute;
+  bottom: 0;
 }
 
-.exitIcon a:hover{
+.exit-icon a:hover{
   opacity: 0.3;
 }
 
-input[type=text]{
-  position: fixed;
-  left: 175px;
-  border-radius: 20px;
-  width: 200px;
-  height: 30px;
+.input-search{
+  width: 65%;
+  margin: 10px;
   border-radius: 35px;
   background-color: #ffffff;
   color: rgb(0, 0, 0);
   padding: 14px 20px;
-  margin: 8px 0;
   border: none;
-  cursor: pointer;
-  width: 15%;
   font-size: 20px;
 }
 
-.editGroup{
-position: relative;
-left: 60px;
-top: 670px;
+.edit-group{
+position: absolute;
+bottom: 0;
+margin: 10px;
 }
 
-.editGroup a:hover{
+.edit-group a:hover{
   opacity: 0.3;
 }
 
-.editPerson{
-  position: relative;
-  left: 160px;
-  top: 611px;
-}
 
-.editPerson a:hover{
+.edit-person a:hover{
   opacity: 0.3;
 }
 
 
 /* Chat containers */
-.container {
+.message-container {
   border: 2px solid rgb(255, 255, 255);
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
-  width: 500px;
+  width: 50%;
 }
 
-.container h1{
+.message-container h1{
  font-size: 12px;
 }
 
 /* Darker chat container */
 .darker {
+
   border-color: rgb(93, 166, 172);
   background-color: rgb(93, 166, 172);
   position: relative;
-  left: 300px;
+  left: 20%;
 }
 
 /* Clear floats */
-.container::after {
+.message-container::after {
   content: "";
   clear: both;
   display: table;
 }
 
-/* Style images */
-.container img {
-  float: left;
-  max-width: 60px;
-  width: 100%;
-  margin-right: 20px;
-  border-radius: 50%;
-}
-
-/* Style the right image */
-.container img.right {
-  float: right;
-  margin-left: 20px;
-  margin-right:0;
-}
 
 /* Style time text */
 .time-right {
@@ -161,20 +127,45 @@ top: 670px;
 
 .navmiddle{
   position: fixed;
-  left: 500px;
+  left: 280px;
+  width: 100%;
   background-color: rgb(184, 184, 184);
-  width: 800px;
-  height: 550px;
-  top: 80px;
+  height: 100%;
 }
 
-.navbottom{
+
+.chat-container{
+  position: relative;
+  padding-left: 20px;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  padding-top: 50px;
+  overflow-y: scroll;
+}
+
+.chat-bottom-container{
   background-color: white;
-  position: fixed;
-  top: 660px;
-  left: 450px; 
-  width: 67%;
+  position: absolute;
+  bottom: 0;
   height: 110px;
+  width: 100%;
+  z-index: 1;
+}
+
+.chat-bottom-spacer{
+  height: 110px;
+  padding-top: 50px;
+}
+
+.chat-top-container{
+  background-color: #474747;
+  position: absolute;
+  top: 0px;
+  height: 50px;
+  width: 100%;
+  z-index: 1;
 }
 
 .navtop{
@@ -189,22 +180,21 @@ top: 670px;
 
 .navtop p{
   position: relative;
-  left: 105px;
+  left: 0px;
   color: rgb(93, 166, 172);
   font-size: 20px;
   top: -8px;
 }
 
 
-.textnachricht{
+.text-nachricht{
   width: 65%;
   height: 80px;
   border: none;
   font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   font-size: 20px;
   position: relative;
-  left: 0px;
-  top: 20px;
+  margin: 10px;
 }
 
 .navbottom img{
@@ -216,3 +206,45 @@ top: 670px;
   opacity: 0.3;
 }
 
+
+.search-container{
+  width: 100%;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

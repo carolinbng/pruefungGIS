@@ -1,86 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel ="stylesheet" href="style.css">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <title>Chat</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script src="index.js" defer></script>
+  <title>Chat</title>
 </head>
+
 <body>
-  
-
-    <div class="sidenav">
-        <div class="chatIcon"><a href="#chat"><img src="chat-white-48dp.svg" width="50px"></a></div>
-        <div class="exitIcon"><a href="#exit"><img src="exit_to_app-white-48dp.svg" width="50px"></a></div>
-      </div>
-    
 
 
-    <div class="sidenav2">
-      <div class="search-container">
-        <form action="/action_page.php">
-          <input type="text" placeholder="Suche.." name="search">
-        </form>
-
-        <div class="containerChat"></div>  
-
-
-        
-        <div class="editGroup"><a href="#"><img src="group_add-white-48dp.svg" width="55px"></a></div>
-
-
-        <div class="editPerson"><a href="#"><img src="person_add-white-48dp.svg" width="50px"></a></div>
-        </div>
-      </div>
-      </div>
-    
+  <div class="sidenav">
+    <div class="chat-icon"><a href="#chat"><img src="img/chat-white-48dp.svg" width="50px"></a></div>
+    <div class="exit-icon"><a href="#exit"><img src="img/exit_to_app-white-48dp.svg" width="50px"></a></div>
+  </div>
 
 
 
+  <div class="sidenav2">
+    <div class="search-container">
+      <form action="/action_page.php">
+        <input type="text" class="input-search" placeholder="Suche.." name="search">
+      </form>
 
-      <div class="navmiddle">
+      <div class="containerChat"></div>
 
-      <div class="container">
+
+
+      <div class="edit-group"><a href="#"><img src="img/group_add-white-48dp.svg" width="55px"></a></div>
+
+    </div>
+  </div>
+  </div>
+
+
+
+  <div class="navmiddle">
+
+    <div class="chat-top-container">
+      <button class="navtop">
+        <p><b><img src="img/profilbild.png" alt="Profilbild" width="30px"> GIS </b></p>
+      </button>
+    </div>
+
+    <div class="chat-container">
+       <!-- Hier kommen die Nachrichten -->
+      <div class="message-container">
         <h1>Hilde</h1>
         <hr>
         <p>Salli wie gohts?</p>
         <span class="time-right">11:00</span>
       </div>
-      
-      <div class="container darker">
-        <p>Hi, i'm super! And du?</p>
+  
+      <div class="message-container darker">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+          diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+          takimata sanctus est Lorem ipsum dolor sit amet.</p>
         <span class="time-left">11:01</span>
       </div>
-      
-      <div class="container">
+  
+      <div class="message-container">
         <h1>Bert</h1>
         <hr>
         <p>Too ;-)</p>
         <span class="time-right">11:02</span>
       </div>
-      
-      <div class="container darker">
+  
+      <div class="message-container darker">
         <p>Tschau</p>
         <span class="time-left">11:05</span>
-      </div>
-      </div>
+      </div>  
 
-
-
-
-      <div class="navtop">
-        <p><b><img src="profilbild.png" alt="Profilbild" width="30px"> GIS </b></p>
-      </div>
-
-
-
-
-      <div class="navbottom"><a href="#" ><img src="send-black-48dp.svg"></a>
-        <textarea class="textnachricht" name="subject" placeholder="Nachricht schreiben.."></textarea>
-      </div>
-
+      <div class="message-container darker">
+        <p>Tschau</p>
+        <span class="time-left">11:05</span>
+      </div> 
       
-</body>
-</html>
+      <div class="message-container darker">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+          diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+          takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <span class="time-left">11:01</span>
+      </div>
 
+<!-- Hier enden die Nachrichten -->
+      <div class="chat-bottom-spacer">
+      </div>
+    </div>
+
+
+
+   <div class="chat-bottom-container">
+    <div class="new-message">
+      <textarea class="text-nachricht" name="subject" placeholder="Nachricht schreiben.."></textarea>
+      <a class="send-icon" href="#"><img src="img/send-black-48dp.svg"></a>
+    </div>
+   </div>
+
+  </div>
+
+
+
+
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Mitglieder: </p>
+    </div>
+
+  </div>
+
+  </div>
+  </div>
+
+
+
+</body>
+
+</html>
