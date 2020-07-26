@@ -49,7 +49,7 @@ var ChatServer;
         let qdata = q.query;
         // Sobald eine Anfrage kommt, wird folgender Inhalt diesem zurückgeschickt:
         // Header für Antwort (Was für eine Art von Inhalt ist unsere Antwort)
-        _response.setHeader("content-type", "text/html; charset=utf-8");
+        _response.setHeader("content-type", "application/json");
         _response.setHeader("Access-Control-Allow-Origin", "*");
         // Man schickt dem Anforderer seine eigene URL zurück
         console.log(q.pathname);
@@ -58,7 +58,7 @@ var ChatServer;
             let userDb = await userData.findOne({ "email": qdata["email"] });
             if (userDb) {
                 if (userDb["passwort"] == qdata["passwort"]) {
-                    let jsonString = JSON.stringify(userDb["email"]);
+                    let jsonString = JSON.stringify(userDb._id);
                     _response.write(jsonString);
                 }
                 else {
@@ -76,8 +76,9 @@ var ChatServer;
             let userDb = await userData.findOne({ "email": qdata["email"] });
             if (!userDb) {
                 console.log("Register user", qdata);
-                userData.insertOne(qdata);
-                let jsonString = JSON.stringify(true);
+                let dbReesponse = await userData.insertOne(qdata);
+                let usrDb = dbReesponse.ops[0];
+                let jsonString = JSON.stringify(usrDb);
                 _response.write(jsonString);
             }
             else {
@@ -87,11 +88,100 @@ var ChatServer;
         }
         //Aktueller Nutzer daten
         else if (q.pathname == "/getUserData") {
-            if (qdata["currentUser"]) {
-                let currentUser = qdata["currentUser"].toString();
-                console.log(currentUser);
-                let userDb = await userData.findOne({ "email": currentUser });
+            if (qdata["currentUserId"]) {
+                let currentUserId = qdata["currentUserId"].toString();
+                console.log(currentUserId);
+                const ObjectID = Mongo.ObjectID;
+                const id = new ObjectID(currentUserId);
+                let userDb = await userData.findOne({ "_id": id });
+                console.log(userDb);
                 let jsonString = JSON.stringify(userDb);
+                _response.write(jsonString);
+            }
+            else {
+                let jsonString = JSON.stringify(false);
+                _response.write(jsonString);
+            }
+        }
+        else if (q.pathname == "/getUserConversations") {
+            console.log(qdata);
+            if (qdata["currentUserId"]) {
+                let currentUserId = qdata["currentUserId"].toString();
+                const ObjectID = Mongo.ObjectID;
+                const id = new ObjectID(currentUserId);
+                let conDb = await conversationData.find({ "members": id }).toArray();
+                let jsonString = JSON.stringify(conDb);
+                _response.write(jsonString);
+            }
+            else {
+                let jsonString = JSON.stringify(false);
+                _response.write(jsonString);
+            }
+        }
+        else if (q.pathname == "/getUsers") {
+            let userDb = await userData.find({}, { projection: { _id: 1, vname: 1, nname: 1 } }).toArray();
+            let jsonString = JSON.stringify(userDb);
+            _response.write(jsonString);
+        }
+        else if (q.pathname == "/newConversation") {
+            const ObjectID = Mongo.ObjectID;
+            let ids = [];
+            for (let elem in qdata) {
+                if (elem != "conversationName") {
+                    const id = new ObjectID(elem);
+                    ids.push(id);
+                }
+            }
+            if (qdata["conversationName"] && ids.length) {
+                let conversation = {
+                    name: qdata["conversationName"],
+                    members: ids,
+                };
+                let dbReesponse = await conversationData.insertOne(conversation);
+                let conDb = dbReesponse.ops[0];
+                let jsonString = JSON.stringify(conDb);
+                _response.write(jsonString);
+            }
+        }
+        else if (q.pathname == "/addUserToConversation") {
+            if (qdata["currentConversationrId"] && qdata["currentUserId"]) {
+                let currentConversationrId = qdata["currentConversationrId"].toString();
+                let currentUserId = qdata["currentUserId"].toString();
+                console.log("uid", currentConversationrId, "convid", currentUserId);
+                const ObjectID = Mongo.ObjectID;
+                const convId = new ObjectID(currentConversationrId);
+                const userId = new ObjectID(currentUserId);
+                let update = await conversationData.updateOne({ _id: convId }, { $push: { members: userId } });
+                let jsonString = JSON.stringify(update);
+                _response.write(jsonString);
+            }
+        }
+        else if (q.pathname == "/getMessages") {
+            console.log(qdata);
+            if (qdata["currentConversationrId"]) {
+                let currentConversationrId = qdata["currentConversationrId"].toString();
+                const ObjectID = Mongo.ObjectID;
+                const id = new ObjectID(currentConversationrId);
+                let mesDb = await messageData.find({ "conversationId": id }).sort({ time: 1 }).toArray();
+                let jsonString = JSON.stringify(mesDb);
+                _response.write(jsonString);
+            }
+            else {
+                let jsonString = JSON.stringify(false);
+                _response.write(jsonString);
+            }
+        }
+        else if (q.pathname == "/sendMessage") {
+            if (qdata) {
+                console.log(qdata);
+                const ObjectID = Mongo.ObjectID;
+                qdata["fromId"] = new ObjectID(qdata["fromId"]);
+                qdata["conversationId"] = new ObjectID(qdata["conversationId"]);
+                qdata["time"] = new Date();
+                let dbReesponse = await messageData.insertOne(qdata);
+                let mesDb = dbReesponse.ops[0];
+                console.log(mesDb);
+                let jsonString = JSON.stringify(mesDb);
                 _response.write(jsonString);
             }
             else {
@@ -108,17 +198,6 @@ var ChatServer;
             }
             console.log(users);
             let jsonString = JSON.stringify(users);
-            _response.write(jsonString);
-        }
-        //
-        else if (q.pathname == "/sendMessage") {
-            let konversatonId = qdata["konversatonId"].toString();
-            let nachricht = qdata["nachricht"].toString();
-            let currentUser = qdata["currentUser"].toString();
-            qdata["time"] = Date.now().toString();
-            let test = messageData.insert(qdata);
-            console.log(test);
-            let jsonString = JSON.stringify(true);
             _response.write(jsonString);
         }
         else {

@@ -11,114 +11,54 @@
 </head>
 
 <body>
-
-
   <div class="sidenav">
     <div class="chat-icon"><a href="#chat"><img src="img/chat-white-48dp.svg" width="50px"></a></div>
-    <div id="logoutBtn" class="exit-icon"><a href="#exit"><img src="img/exit_to_app-white-48dp.svg" width="50px"></a></div>
+    <div id="logoutBtn" class="exit-icon"><a href="#exit"><img src="img/exit_to_app-white-48dp.svg" width="50px"></a>
+    </div>
   </div>
-
-
-
   <div class="sidenav2">
-  
-      <div class="edit-group"><a href="#"><img src="img/group_add-white-48dp.svg" width="55px"></a></div>
+    <div id="conversationContainer">
+    </div>
+    <div id="newChatBtn" class="edit-group"><a href="#"><img src="img/group_add-white-48dp.svg" width="55px"></a></div>
   </div>
   </div>
-
-
-
   <div class="navmiddle">
-
     <div class="chat-top-container">
       <button class="navtop">
         <p><b><img src="img/profilbild.png" alt="Profilbild" width="30px"> GIS </b></p>
       </button>
       <span class="user-name" id="loggedInUser"></span>
     </div>
-
     <div class="chat-container">
-       <!-- Hier kommen die Nachrichten -->
-      <div class="message-container">
-        <h1>Hilde</h1>
-        <hr>
-        <p>Salli wie gohts?</p>
-        <span class="time-right">11:00</span>
+      <!-- Hier kommen die Nachrichten -->
+      <div id="currentMessages">
       </div>
-  
-      <div class="message-container darker">
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-          diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        <span class="time-left">11:01</span>
-      </div>
-  
-      <div class="message-container">
-        <h1>Bert</h1>
-        <hr>
-        <p>Too ;-)</p>
-        <span class="time-right">11:02</span>
-      </div>
-  
-      <div class="message-container darker">
-        <p>Tschau</p>
-        <span class="time-left">11:05</span>
-      </div>  
-
-      <div class="message-container darker">
-        <p>Tschau</p>
-        <span class="time-left">11:05</span>
-      </div> 
-      
-      <div class="message-container darker">
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-          diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        <span class="time-left">11:01</span>
-      </div>
-
-<!-- Hier enden die Nachrichten -->
+      <!-- Hier enden die Nachrichten -->
       <div class="chat-bottom-spacer">
       </div>
     </div>
-
-
-
-   <div class="chat-bottom-container">
-    <div class="new-message">
-      <form>
-        <textarea id="message" class="text-nachricht" name="message" placeholder="Nachricht schreiben.."></textarea>
-        <a class="send-icon" id="sendBtn" href="#"><img src="img/send-black-48dp.svg"></a>
-      </form>
-     
+    <div class="chat-bottom-container">
+      <div class="new-message">
+        <form>
+          <textarea id="newMessage" class="text-nachricht" name="newMessage"
+            placeholder="Nachricht schreiben.."></textarea>
+          <a class="send-icon" id="sendBtn" href="#"><img src="img/send-black-48dp.svg"></a>
+        </form>
+      </div>
     </div>
-   </div>
-
   </div>
-
-
-
-
-
   <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <p>Mitglieder: </p>
+      <form id="usersContainer">
+        <input type="text" id="conversationName" name="conversationName" placeholder="Konversationsname">
+      </form>
+      <button type="button" id="createChatBtn">Erstellen</button>
     </div>
-
-  </div>
-
   </div>
   </div>
-
-
-
+  </div>
 </body>
 
 </html>

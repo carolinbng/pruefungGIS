@@ -9,8 +9,8 @@ async function login(): Promise<void> {
     let response: string = await serverResponse.json();
     console.log(response);
     if (response) {
-        sessionStorage.setItem("currentUser", response);
-        window.location.href = '../Chat/index.html';
+        sessionStorage.setItem("currentUserId", response);
+        window.location.href = './Chat/index.html';
     }
     else {
         alert("Falscher Nutzer oder Passwort!");

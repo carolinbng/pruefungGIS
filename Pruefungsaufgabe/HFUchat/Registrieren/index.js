@@ -6,12 +6,21 @@ async function register() {
     let url = "http://localhost:8100";
     if (formData.get("passwort") == formData.get("passwortwiederholen")) {
         let query = new URLSearchParams(formData);
-        url = url + "/register" + "?" + query.toString();
-        let serverResponse = await fetch(url);
+        let apiurl = url + "/register" + "?" + query.toString();
+        let serverResponse = await fetch(apiurl);
         let response = await serverResponse.json();
-        console.log(response);
+        console.log("resp", response);
+        console.log("asiaso");
+        if (response["_id"]) {
+            let queryAddUser = new URLSearchParams({ "currentUserId": response["_id"], "currentConversationrId": "5f1cc8cef570ac54a0703b6f" });
+            apiurl = url + "/addUserToConversation" + "?" + queryAddUser.toString();
+            let addedToConv = await fetch(apiurl);
+            queryAddUser = new URLSearchParams({ "currentUserId": response["_id"], "currentConversationrId": "5f1c985f228aa84da1f7e50b" });
+            apiurl = url + "/addUserToConversation" + "?" + queryAddUser.toString();
+            addedToConv = await fetch(apiurl);
+        }
         if (response) {
-            window.location.href = '../login/index.html';
+            window.location.href = '../index.html';
         }
         else {
             alert("Nutzer existiert bereits!");
