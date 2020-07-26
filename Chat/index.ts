@@ -51,6 +51,8 @@ namespace HFUChat {
     window.location.href = "../index.html";
   }
 
+  let timer = setInterval(getMessages, 3000);
+
   // Abmelden
   function logout(): void {
     sessionStorage.clear();
@@ -89,14 +91,16 @@ namespace HFUChat {
   }
 
   async function getMessages(): Promise<void> {
-    let query: URLSearchParams = new URLSearchParams(<any>{
-      currentConversationrId: currentConversationId,
-    });
-    let apiurl = url + "/getMessages" + "?" + query.toString();
-    let serverResponse: Response = await fetch(apiurl);
-    currentMessages = await serverResponse.json();
-    console.log(currentMessages);
-    showMessages();
+    if(currentConversationId){
+      let query: URLSearchParams = new URLSearchParams(<any>{
+        currentConversationrId: currentConversationId,
+      });
+      let apiurl = url + "/getMessages" + "?" + query.toString();
+      let serverResponse: Response = await fetch(apiurl);
+      currentMessages = await serverResponse.json();
+      console.log(currentMessages);
+      showMessages();
+    }
   }
 
   async function getUsers(): Promise<void> {

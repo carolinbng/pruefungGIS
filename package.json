@@ -1,0 +1,26 @@
+{
+  "name": "pruefunggis",
+  "version": "1.0.0",
+  "description": "HFU Chat",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "^3.5.9"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.5.25",
+    "@types/node": "^14.0.13"
+  },
+  "scripts": {
+    "start": "node server/server.js"
+  }, 
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carolinbng/pruefungGIS.git"
+  },
+  "author": "Carolin Binninger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carolinbng/pruefungGIS/issues"
+  },
+  "homepage": "https://github.com/carolinbng/pruefungGIS#readme"
+}

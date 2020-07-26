@@ -29,6 +29,7 @@ var HFUChat;
         alert("Nutzer nicht angemeldet!");
         window.location.href = "../index.html";
     }
+    let timer = setInterval(getMessages, 3000);
     // Abmelden
     function logout() {
         sessionStorage.clear();
@@ -64,14 +65,16 @@ var HFUChat;
         showConversations();
     }
     async function getMessages() {
-        let query = new URLSearchParams({
-            currentConversationrId: currentConversationId,
-        });
-        let apiurl = url + "/getMessages" + "?" + query.toString();
-        let serverResponse = await fetch(apiurl);
-        currentMessages = await serverResponse.json();
-        console.log(currentMessages);
-        showMessages();
+        if (currentConversationId) {
+            let query = new URLSearchParams({
+                currentConversationrId: currentConversationId,
+            });
+            let apiurl = url + "/getMessages" + "?" + query.toString();
+            let serverResponse = await fetch(apiurl);
+            currentMessages = await serverResponse.json();
+            console.log(currentMessages);
+            showMessages();
+        }
     }
     async function getUsers() {
         let apiurl = url + "/getUsers";
