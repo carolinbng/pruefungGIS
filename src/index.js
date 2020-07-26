@@ -8,7 +8,6 @@ async function login() {
     url = url + "/signin" + "?" + query.toString();
     let serverResponse = await fetch(url);
     let response = await serverResponse.json();
-    console.log(response);
     if (response) {
         sessionStorage.setItem("currentUserId", response);
         window.location.href = './Chat/index.html';

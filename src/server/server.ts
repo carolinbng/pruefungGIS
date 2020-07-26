@@ -87,7 +87,6 @@ export namespace ChatServer {
     else if (q.pathname == "/register") {
       let userDb = await userData.findOne({"email": qdata["email"]});
       if (!userDb) {
-        console.log("Register user", qdata);
         let dbReesponse = await userData.insertOne(qdata);
         let usrDb = dbReesponse.ops[0];
         let jsonString: string = JSON.stringify(usrDb);
@@ -102,11 +101,9 @@ export namespace ChatServer {
     else if (q.pathname == "/getUserData") {
       if (qdata["currentUserId"]) {
         let currentUserId: string = qdata["currentUserId"].toString();
-        console.log(currentUserId);
         const ObjectID = Mongo.ObjectID;
         const id: Mongo.ObjectID = new ObjectID(currentUserId);
         let userDb = await userData.findOne({ "_id" : id });
-        console.log(userDb)
         let jsonString: string = JSON.stringify(userDb);
         _response.write(jsonString);
       }
@@ -117,7 +114,6 @@ export namespace ChatServer {
     }
 
     else if (q.pathname == "/getUserConversations") {
-      console.log(qdata);
       if (qdata["currentUserId"]) {
         let currentUserId: string = qdata["currentUserId"].toString();
         const ObjectID = Mongo.ObjectID;
@@ -163,7 +159,6 @@ export namespace ChatServer {
       if (qdata["currentConversationrId"] && qdata["currentUserId"]){
         let currentConversationrId: string = qdata["currentConversationrId"].toString();
         let currentUserId: string = qdata["currentUserId"].toString();
-        console.log("uid":currentConversationrId,"convid":currentUserId);
         const ObjectID = Mongo.ObjectID;
         const convId: Mongo.ObjectID = new ObjectID(currentConversationrId);
         const userId: Mongo.ObjectID = new ObjectID(currentUserId);
@@ -175,7 +170,6 @@ export namespace ChatServer {
     }
 
     else if (q.pathname == "/getMessages") {
-      console.log(qdata);
       if (qdata["currentConversationrId"]) {
         let currentConversationrId: string = qdata["currentConversationrId"].toString();
         const ObjectID = Mongo.ObjectID;
@@ -192,14 +186,12 @@ export namespace ChatServer {
 
     else if (q.pathname == "/sendMessage") {
       if (qdata) {
-        console.log(qdata);
         const ObjectID = Mongo.ObjectID;
         qdata["fromId"] = new ObjectID(qdata["fromId"]);
         qdata["conversationId"] = new ObjectID(qdata["conversationId"]);
         qdata["time"] = new Date();
         let dbReesponse = await messageData.insertOne(qdata);
         let mesDb = dbReesponse.ops[0];
-        console.log(mesDb);
         let jsonString: string = JSON.stringify(mesDb);
         _response.write(jsonString);
       }
@@ -216,7 +208,6 @@ export namespace ChatServer {
         x["passwort"] = "";
         x["passwortwiederholen"] = "";
       }
-      console.log(users);
       let jsonString: string = JSON.stringify(users);
       _response.write(jsonString);
     }

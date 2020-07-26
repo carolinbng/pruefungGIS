@@ -8,8 +8,6 @@ async function register(): Promise<void> {
         let apiurl = url + "/register" + "?" + query.toString();
         let serverResponse: Response = await fetch(apiurl);
         let response: string = await serverResponse.json();
-        console.log("resp",response);
-        console.log("asiaso")
         if(response["_id"]){
             let queryAddUser: URLSearchParams = new URLSearchParams(<any>{"currentUserId": response["_id"], "currentConversationrId": "5f1cc8cef570ac54a0703b6f" });
             apiurl = url + "/addUserToConversation" + "?" + queryAddUser.toString();

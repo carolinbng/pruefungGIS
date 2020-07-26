@@ -9,7 +9,7 @@ var HFUChat;
     let currentUserId = sessionStorage.getItem("currentUserId");
     let url = "https://hfu-chat.herokuapp.com";
     let modal = document.getElementById("myModal");
-    // Instanz aktueller Nutzer
+    // Aktuelle Daten
     let currentUser;
     let currentConversations;
     let currentConversationId;
@@ -19,7 +19,7 @@ var HFUChat;
         message: "",
         fromId: "",
         fromName: "",
-        conversationId: "",
+        conversationId: ""
     };
     // Seite hat geladen
     if (currentUserId) {
@@ -29,6 +29,7 @@ var HFUChat;
         alert("Nutzer nicht angemeldet!");
         window.location.href = "../index.html";
     }
+    // Timer Chat aktualisierungs intervall
     let timer = setInterval(getMessages, 3000);
     // Abmelden
     function logout() {
@@ -42,7 +43,6 @@ var HFUChat;
         let apiurl = url + "/getUserData" + "?" + query.toString();
         let serverResponse = await fetch(apiurl);
         currentUser = await serverResponse.json();
-        console.log(currentUser);
         let loggedInUser = document.getElementById("loggedInUser");
         // Namen setzen
         if (loggedInUser) {
@@ -72,7 +72,6 @@ var HFUChat;
             let apiurl = url + "/getMessages" + "?" + query.toString();
             let serverResponse = await fetch(apiurl);
             currentMessages = await serverResponse.json();
-            console.log(currentMessages);
             showMessages();
         }
     }
@@ -106,7 +105,6 @@ var HFUChat;
             newMessage.conversationId = currentConversationId;
             newMessage.message = text;
             let query = new URLSearchParams(newMessage);
-            console.log(query.toString());
             let apiurl = url + "/sendMessage" + "?" + query.toString();
             let serverResponse = await fetch(apiurl);
             let addedMessage = await serverResponse.json();
@@ -115,6 +113,7 @@ var HFUChat;
             document.getElementById("newMessage").value = "";
         }
     }
+    // Nachrichten füllen
     function showMessages() {
         let chatContainer = document.getElementById("currentMessages");
         if (chatContainer) {
@@ -141,12 +140,14 @@ var HFUChat;
             }
         }
     }
+    // Chat wechseln
     function changeConversation(_event) {
         let oldActive = document.getElementsByClassName("active");
         currentConversationId = _event.currentTarget.getAttribute("id");
         showConversations();
         getMessages();
     }
+    // Konversationen in Nav menu anzeigen
     function showConversations() {
         let conversationContainer = document.getElementById("conversationContainer");
         if (conversationContainer) {
@@ -169,6 +170,7 @@ var HFUChat;
     function newChat() {
         modal.style.display = "block";
     }
+    // Modal mit verfügbaren Nutzern füllen
     function initModalContent() {
         for (let elem of availableUsers) {
             let user = document.createElement("div");
@@ -186,12 +188,10 @@ var HFUChat;
         }
     }
     // Modal functions
-    // When the user clicks on <span> (x), close the modal
     let span = document.getElementsByClassName("close")[0];
     span.onclick = function () {
         modal.style.display = "none";
     };
-    // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";

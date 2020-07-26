@@ -4,43 +4,22 @@ namespace HFUChat {
   document.getElementById("newChatBtn")?.addEventListener("click", newChat);
   document.getElementById("createChatBtn")?.addEventListener("click", newConversation);
 
-  // Nutzer Interface
-  interface User {
-    _id: string;
-    vname: string;
-    nname: string;
-    mail: string;
-    konversationIds: [];
-  }
-
-  interface Conversation {
-    _id: string;
-    name: string;
-    members: string[];
-  }
-
-  interface Message {
-    message: string;
-    fromId: string;
-    fromName: string;
-    conversationId: string;
-  }
-
   // Aktueller Nutzer auslesen
   let currentUserId = sessionStorage.getItem("currentUserId");
   let url: string = "https://hfu-chat.herokuapp.com";
   let modal = document.getElementById("myModal");
-  // Instanz aktueller Nutzer
-  let currentUser: User;
-  let currentConversations: Conversation[];
+
+  // Aktuelle Daten
+  let currentUser: HFUChat.User;
+  let currentConversations: HFUChat.Conversation[];
   let currentConversationId: string;
-  let availableUsers: User[];
-  let currentMessages: Message[];
-  let newMessage: Message = {
+  let availableUsers: HFUChat.User[];
+  let currentMessages: HFUChat.Message[];
+  let newMessage: HFUChat.Message = {
     message: "",
     fromId: "",
     fromName: "",
-    conversationId: "",
+    conversationId: ""
   };
 
   // Seite hat geladen
@@ -51,6 +30,7 @@ namespace HFUChat {
     window.location.href = "../index.html";
   }
 
+  // Timer Chat aktualisierungs intervall
   let timer = setInterval(getMessages, 3000);
 
   // Abmelden
@@ -66,7 +46,6 @@ namespace HFUChat {
     let apiurl = url + "/getUserData" + "?" + query.toString();
     let serverResponse: Response = await fetch(apiurl);
     currentUser = await serverResponse.json();
-    console.log(currentUser);
     let loggedInUser = document.getElementById("loggedInUser");
     // Namen setzen
     if (loggedInUser) {
@@ -91,14 +70,13 @@ namespace HFUChat {
   }
 
   async function getMessages(): Promise<void> {
-    if(currentConversationId){
+    if (currentConversationId) {
       let query: URLSearchParams = new URLSearchParams(<any>{
         currentConversationrId: currentConversationId,
       });
       let apiurl = url + "/getMessages" + "?" + query.toString();
       let serverResponse: Response = await fetch(apiurl);
       currentMessages = await serverResponse.json();
-      console.log(currentMessages);
       showMessages();
     }
   }
@@ -136,7 +114,6 @@ namespace HFUChat {
       newMessage.conversationId = currentConversationId;
       newMessage.message = text;
       let query: URLSearchParams = new URLSearchParams(<any>newMessage);
-      console.log(query.toString());
       let apiurl = url + "/sendMessage" + "?" + query.toString();
       let serverResponse: Response = await fetch(apiurl);
       let addedMessage = await serverResponse.json();
@@ -146,6 +123,8 @@ namespace HFUChat {
     }
   }
 
+
+  // Nachrichten füllen
   function showMessages(): void {
     let chatContainer = document.getElementById("currentMessages");
     if (chatContainer) {
@@ -165,15 +144,15 @@ namespace HFUChat {
         messageTime.className = "time-left";
         messageTime.innerHTML = elem.time?.toString();
         messageContent.innerHTML = elem.message;
-
         messageContainer.appendChild(messageContent);
         messageContainer.appendChild(messageTime);
-
         chatContainer.appendChild(messageContainer);
       }
     }
   }
 
+
+  // Chat wechseln
   function changeConversation(_event: Event): void {
     let oldActive = document.getElementsByClassName("active");
     currentConversationId = (<HTMLDivElement>(
@@ -183,6 +162,8 @@ namespace HFUChat {
     getMessages();
   }
 
+
+  // Konversationen in Nav menu anzeigen
   function showConversations(): void {
     let conversationContainer = document.getElementById(
       "conversationContainer"
@@ -208,7 +189,7 @@ namespace HFUChat {
   function newChat(): void {
     modal.style.display = "block";
   }
-
+  // Modal mit verfügbaren Nutzern füllen
   function initModalContent(): void {
     for (let elem of availableUsers) {
       let user: HTMLElement = document.createElement("div");
@@ -217,7 +198,7 @@ namespace HFUChat {
       userSelect.name = elem._id;
       userSelect.id = elem._id;
       user.appendChild(userSelect);
-      user.className ="userList";
+      user.className = "userList";
       user.innerHTML += elem.vname + " " + elem.nname;
       let userListWrapper = document.getElementById("userListWrapper");
       if (userListWrapper) {
@@ -227,14 +208,11 @@ namespace HFUChat {
   }
 
   // Modal functions
-
-  // When the user clicks on <span> (x), close the modal
   let span = document.getElementsByClassName("close")[0];
   span.onclick = function () {
     modal.style.display = "none";
   };
 
-  // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";

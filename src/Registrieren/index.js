@@ -9,8 +9,6 @@ async function register() {
         let apiurl = url + "/register" + "?" + query.toString();
         let serverResponse = await fetch(apiurl);
         let response = await serverResponse.json();
-        console.log("resp", response);
-        console.log("asiaso");
         if (response["_id"]) {
             let queryAddUser = new URLSearchParams({ "currentUserId": response["_id"], "currentConversationrId": "5f1cc8cef570ac54a0703b6f" });
             apiurl = url + "/addUserToConversation" + "?" + queryAddUser.toString();
