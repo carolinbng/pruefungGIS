@@ -3,7 +3,7 @@ document.getElementById("submitBtn")?.addEventListener("click", login);
 //Hängt Formulardaten an URL
 async function login() {
     let formData = new FormData(document.forms[0]);
-    let url = "http://localhost:8100";
+    let url = "https://hfu-chat.herokuapp.com";
     let query = new URLSearchParams(formData);
     url = url + "/signin" + "?" + query.toString();
     let serverResponse = await fetch(url);

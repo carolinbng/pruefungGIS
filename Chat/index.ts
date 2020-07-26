@@ -28,7 +28,7 @@ namespace HFUChat {
 
   // Aktueller Nutzer auslesen
   let currentUserId = sessionStorage.getItem("currentUserId");
-  let url: string = "http://localhost:8100";
+  let url: string = "https://hfu-chat.herokuapp.com";
   let modal = document.getElementById("myModal");
   // Instanz aktueller Nutzer
   let currentUser: User;

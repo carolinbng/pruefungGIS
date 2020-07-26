@@ -2,7 +2,7 @@ document.getElementById("submitBtn")?.addEventListener("click", register);
 //Hängt Formulardaten an URL
 async function register(): Promise<void> {
     let formData: FormData = new FormData(document.forms[0]);
-    let url: string = "http://localhost:8100";
+    let url: string = "https://hfu-chat.herokuapp.com";
     if (formData.get("passwort") == formData.get("passwortwiederholen")) {
         let query: URLSearchParams = new URLSearchParams(<any>formData);
         let apiurl = url + "/register" + "?" + query.toString();
