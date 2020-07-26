@@ -139,7 +139,9 @@ var HFUChat;
         }
     }
     function changeConversation(_event) {
+        let oldActive = document.getElementsByClassName("active");
         currentConversationId = _event.currentTarget.getAttribute("id");
+        showConversations();
         getMessages();
     }
     function showConversations() {
@@ -147,11 +149,17 @@ var HFUChat;
         if (conversationContainer) {
             conversationContainer.innerHTML = "";
             for (let elem of currentConversations) {
+                let wrapper = document.createElement("div");
                 let conversation = document.createElement("button");
                 conversation.id = elem._id;
                 conversation.innerHTML = elem.name;
+                conversation.className = "conversationBtn";
+                if (currentConversationId == elem._id) {
+                    conversation.className = "conversationBtn active";
+                }
                 conversation.addEventListener("click", changeConversation);
-                conversationContainer.appendChild(conversation);
+                wrapper.appendChild(conversation);
+                conversationContainer.appendChild(wrapper);
             }
         }
     }
@@ -161,15 +169,16 @@ var HFUChat;
     function initModalContent() {
         for (let elem of availableUsers) {
             let user = document.createElement("div");
-            user.innerHTML = elem.vname + " " + elem.nname;
             let userSelect = document.createElement("input");
             userSelect.type = "checkbox";
             userSelect.name = elem._id;
             userSelect.id = elem._id;
             user.appendChild(userSelect);
-            let usersContainer = document.getElementById("usersContainer");
-            if (usersContainer) {
-                usersContainer.append(user);
+            user.className = "userList";
+            user.innerHTML += elem.vname + " " + elem.nname;
+            let userListWrapper = document.getElementById("userListWrapper");
+            if (userListWrapper) {
+                userListWrapper.append(user);
             }
         }
     }

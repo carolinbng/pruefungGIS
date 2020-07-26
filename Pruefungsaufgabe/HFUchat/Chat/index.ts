@@ -108,7 +108,7 @@ namespace HFUChat {
 
   async function newConversation(_event: Event): Promise<void> {
     let formData: FormData = new FormData(document.forms[1]);
-    if(formData.get("conversationName")){
+    if (formData.get("conversationName")) {
       let query: URLSearchParams = new URLSearchParams(<any>formData);
       let apiurl =
         url + "/newConversation" + "?" + query.toString() + "&" + currentUser._id;
@@ -118,7 +118,7 @@ namespace HFUChat {
       showConversations();
       modal.style.display = "none";
     }
-    else{
+    else {
       alert("Bitte gebe dem Chat einen Namen!")
     }
   }
@@ -171,9 +171,11 @@ namespace HFUChat {
   }
 
   function changeConversation(_event: Event): void {
+    let oldActive = document.getElementsByClassName("active");
     currentConversationId = (<HTMLDivElement>(
       (<HTMLElement>_event.currentTarget)
     )).getAttribute("id")!;
+    showConversations();
     getMessages();
   }
 
@@ -184,11 +186,17 @@ namespace HFUChat {
     if (conversationContainer) {
       conversationContainer.innerHTML = "";
       for (let elem of currentConversations) {
+        let wrapper: HTMLElement = document.createElement("div");
         let conversation: HTMLElement = document.createElement("button");
         conversation.id = elem._id;
         conversation.innerHTML = elem.name;
+        conversation.className = "conversationBtn";
+        if (currentConversationId == elem._id) {
+          conversation.className = "conversationBtn active";
+        }
         conversation.addEventListener("click", changeConversation);
-        conversationContainer.appendChild(conversation);
+        wrapper.appendChild(conversation);
+        conversationContainer.appendChild(wrapper);
       }
     }
   }
@@ -200,15 +208,16 @@ namespace HFUChat {
   function initModalContent(): void {
     for (let elem of availableUsers) {
       let user: HTMLElement = document.createElement("div");
-      user.innerHTML = elem.vname + " " + elem.nname;
       let userSelect: HTMLElement = document.createElement("input");
       userSelect.type = "checkbox";
       userSelect.name = elem._id;
       userSelect.id = elem._id;
       user.appendChild(userSelect);
-      let usersContainer = document.getElementById("usersContainer");
-      if (usersContainer) {
-        usersContainer.append(user);
+      user.className ="userList";
+      user.innerHTML += elem.vname + " " + elem.nname;
+      let userListWrapper = document.getElementById("userListWrapper");
+      if (userListWrapper) {
+        userListWrapper.append(user);
       }
     }
   }

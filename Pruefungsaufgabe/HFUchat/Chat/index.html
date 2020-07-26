@@ -24,10 +24,7 @@
   </div>
   <div class="navmiddle">
     <div class="chat-top-container">
-      <button class="navtop">
-        <p><b><img src="img/profilbild.png" alt="Profilbild" width="30px"> GIS </b></p>
-      </button>
-      <span class="user-name" id="loggedInUser"></span>
+         <span class="user-name" id="loggedInUser"></span>
     </div>
     <div class="chat-container">
       <!-- Hier kommen die Nachrichten -->
@@ -51,10 +48,11 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <p>Mitglieder: </p>
-      <form id="usersContainer">
-        <input type="text" id="conversationName" name="conversationName" placeholder="Konversationsname">
+      <form>
+        <div id="userListWrapper" class="userListWrapper"></div>
+        <input type="text" class="conversationName" id="conversationName" name="conversationName" placeholder="Chatname">
       </form>
-      <button type="button" id="createChatBtn">Erstellen</button>
+      <button type="button" class="createChatBtn" id="createChatBtn">Erstellen</button>
     </div>
   </div>
   </div>
