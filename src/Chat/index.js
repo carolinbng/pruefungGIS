@@ -95,7 +95,6 @@ var HFUChat;
     function enterMessage(_event) {
         if (_event.keyCode === 13) {
             _event.preventDefault();
-            console.log("test");
             sendMessage();
         }
     }
@@ -113,10 +112,10 @@ var HFUChat;
             let addedMessage = await serverResponse.json();
             currentMessages.push(addedMessage);
             showMessages();
+            document.getElementById("newMessage").value = "";
+            let chatWrapper = document.getElementById("chatWrapper");
+            chatWrapper.scrollTop = chatWrapper.scrollHeight;
         }
-        document.getElementById("newMessage").value = "";
-        let chatWrapper = document.getElementById("chatWrapper");
-        chatWrapper.scrollTop = chatWrapper.scrollHeight;
     }
     // Nachrichten füllen
     function showMessages() {
@@ -143,16 +142,15 @@ var HFUChat;
                 messageContainer.appendChild(messageTime);
                 chatContainer.appendChild(messageContainer);
             }
-            let chatWrapper = document.getElementById("chatWrapper");
-            chatWrapper.scrollTop = chatContainer.scrollHeight;
         }
     }
     // Chat wechseln
-    function changeConversation(_event) {
-        let oldActive = document.getElementsByClassName("active");
+    async function changeConversation(_event) {
         currentConversationId = _event.currentTarget.getAttribute("id");
         showConversations();
-        getMessages();
+        await getMessages();
+        let chatWrapper = document.getElementById("chatWrapper");
+        chatWrapper.scrollTop = chatWrapper.scrollHeight;
     }
     // Konversationen in Nav menu anzeigen
     function showConversations() {
@@ -188,7 +186,6 @@ var HFUChat;
                     }
                 }
                 chatMembers.innerHTML = "";
-                console.log(members);
                 for (let elem of members) {
                     let wrapper = document.createElement("div");
                     wrapper.innerHTML = elem + " ●";
@@ -197,6 +194,8 @@ var HFUChat;
                 }
             }
         }
+        let chatWrapper = document.getElementById("chatWrapper");
+        chatWrapper.scrollTop = chatWrapper.scrollHeight;
     }
     function newChat() {
         modal.style.display = "block";

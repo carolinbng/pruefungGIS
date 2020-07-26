@@ -124,10 +124,10 @@ namespace HFUChat {
       let addedMessage = await serverResponse.json();
       currentMessages.push(addedMessage);
       showMessages();
+      document.getElementById("newMessage").value = "";
+      let chatWrapper = document.getElementById("chatWrapper");
+      chatWrapper.scrollTop = chatWrapper.scrollHeight;
     }
-    document.getElementById("newMessage").value = "";
-    let chatWrapper = document.getElementById("chatWrapper");
-    chatWrapper.scrollTop = chatWrapper.scrollHeight;
   }
 
 
@@ -155,20 +155,19 @@ namespace HFUChat {
         messageContainer.appendChild(messageTime);
         chatContainer.appendChild(messageContainer);
       }
-      let chatWrapper = document.getElementById("chatWrapper");
-      chatWrapper.scrollTop = chatContainer.scrollHeight;
     }
   }
 
 
   // Chat wechseln
-  function changeConversation(_event: Event): void {
-    let oldActive = document.getElementsByClassName("active");
+  async function changeConversation(_event: Event): Promise<void> {
     currentConversationId = (<HTMLDivElement>(
       (<HTMLElement>_event.currentTarget)
     )).getAttribute("id")!;
     showConversations();
-    getMessages();
+    await getMessages();
+    let chatWrapper = document.getElementById("chatWrapper");
+    chatWrapper.scrollTop = chatWrapper.scrollHeight;
   }
 
 
@@ -216,6 +215,8 @@ namespace HFUChat {
         }
       }
     }
+    let chatWrapper = document.getElementById("chatWrapper");
+    chatWrapper.scrollTop = chatWrapper.scrollHeight;
   }
 
   function newChat(): void {
