@@ -5,6 +5,7 @@ var HFUChat;
     document.getElementById("sendBtn")?.addEventListener("click", sendMessage);
     document.getElementById("newChatBtn")?.addEventListener("click", newChat);
     document.getElementById("createChatBtn")?.addEventListener("click", newConversation);
+    document.getElementById("newMessage")?.addEventListener("keyup", enterMessage);
     // Aktueller Nutzer auslesen
     let currentUserId = sessionStorage.getItem("currentUserId");
     let url = "https://hfu-chat.herokuapp.com";
@@ -43,8 +44,8 @@ var HFUChat;
         let apiurl = url + "/getUserData" + "?" + query.toString();
         let serverResponse = await fetch(apiurl);
         currentUser = await serverResponse.json();
-        await getUserConversations();
         await getUsers();
+        await getUserConversations();
     }
     async function getUserConversations() {
         let query = new URLSearchParams({
@@ -91,6 +92,13 @@ var HFUChat;
             alert("Bitte gebe dem Chat einen Namen!");
         }
     }
+    function enterMessage(_event) {
+        if (_event.keyCode === 13) {
+            _event.preventDefault();
+            console.log("test");
+            sendMessage();
+        }
+    }
     async function sendMessage() {
         let formData = new FormData(document.forms[0]);
         let text = formData.get("newMessage")?.toString();
@@ -105,8 +113,10 @@ var HFUChat;
             let addedMessage = await serverResponse.json();
             currentMessages.push(addedMessage);
             showMessages();
-            document.getElementById("newMessage").value = "";
         }
+        document.getElementById("newMessage").value = "";
+        let chatWrapper = document.getElementById("chatWrapper");
+        chatWrapper.scrollTop = chatWrapper.scrollHeight;
     }
     // Nachrichten füllen
     function showMessages() {
@@ -133,36 +143,14 @@ var HFUChat;
                 messageContainer.appendChild(messageTime);
                 chatContainer.appendChild(messageContainer);
             }
+            let chatWrapper = document.getElementById("chatWrapper");
+            chatWrapper.scrollTop = chatContainer.scrollHeight;
         }
     }
     // Chat wechseln
     function changeConversation(_event) {
         let oldActive = document.getElementsByClassName("active");
         currentConversationId = _event.currentTarget.getAttribute("id");
-        let chatMembers = document.getElementById("chatMembers");
-        // Namen setzen
-        let members = [];
-        if (chatMembers && currentConversations) {
-            for (let elem of currentConversations) {
-                if (elem._id == currentConversationId) {
-                    for (let member of elem.members) {
-                        for (let user of availableUsers) {
-                            if (user._id == member) {
-                                members.push(user.vname + " " + user.nname);
-                            }
-                        }
-                    }
-                }
-            }
-            console.log(members);
-            chatMembers.innerHTML = "";
-            for (let elem of members) {
-                let wrapper = document.createElement("div");
-                wrapper.innerHTML = elem + " ●";
-                wrapper.className = "chatMemberWrapper";
-                chatMembers.appendChild(wrapper);
-            }
-        }
         showConversations();
         getMessages();
     }
@@ -183,6 +171,30 @@ var HFUChat;
                 conversation.addEventListener("click", changeConversation);
                 wrapper.appendChild(conversation);
                 conversationContainer.appendChild(wrapper);
+            }
+            let chatMembers = document.getElementById("chatMembers");
+            // Namen setzen
+            let members = [];
+            if (chatMembers && currentConversations && availableUsers) {
+                for (let elem of currentConversations) {
+                    if (elem._id == currentConversationId) {
+                        for (let member of elem.members) {
+                            for (let user of availableUsers) {
+                                if (user._id == member) {
+                                    members.push(user.vname + " " + user.nname);
+                                }
+                            }
+                        }
+                    }
+                }
+                chatMembers.innerHTML = "";
+                console.log(members);
+                for (let elem of members) {
+                    let wrapper = document.createElement("div");
+                    wrapper.innerHTML = elem + " ●";
+                    wrapper.className = "chatMemberWrapper";
+                    chatMembers.appendChild(wrapper);
+                }
             }
         }
     }

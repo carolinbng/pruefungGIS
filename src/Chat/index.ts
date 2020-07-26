@@ -3,11 +3,13 @@ namespace HFUChat {
   document.getElementById("sendBtn")?.addEventListener("click", sendMessage);
   document.getElementById("newChatBtn")?.addEventListener("click", newChat);
   document.getElementById("createChatBtn")?.addEventListener("click", newConversation);
+  document.getElementById("newMessage")?.addEventListener("keyup", enterMessage);
 
   // Aktueller Nutzer auslesen
   let currentUserId = sessionStorage.getItem("currentUserId");
   let url: string = "https://hfu-chat.herokuapp.com";
   let modal = document.getElementById("myModal");
+
 
   // Aktuelle Daten
   let currentUser: HFUChat.User;
@@ -46,8 +48,8 @@ namespace HFUChat {
     let apiurl = url + "/getUserData" + "?" + query.toString();
     let serverResponse: Response = await fetch(apiurl);
     currentUser = await serverResponse.json();
-    await getUserConversations();
     await getUsers();
+    await getUserConversations();
   }
 
 
@@ -101,6 +103,13 @@ namespace HFUChat {
     }
   }
 
+  function enterMessage(_event: Event) {
+    if (_event.keyCode === 13) {
+      _event.preventDefault();
+      sendMessage();
+    }
+  }
+
   async function sendMessage(): Promise<void> {
     let formData: FormData = new FormData(document.forms[0]);
     let text = formData.get("newMessage")?.toString();
@@ -115,8 +124,10 @@ namespace HFUChat {
       let addedMessage = await serverResponse.json();
       currentMessages.push(addedMessage);
       showMessages();
-      document.getElementById("newMessage").value = "";
     }
+    document.getElementById("newMessage").value = "";
+    let chatWrapper = document.getElementById("chatWrapper");
+    chatWrapper.scrollTop = chatWrapper.scrollHeight;
   }
 
 
@@ -144,6 +155,8 @@ namespace HFUChat {
         messageContainer.appendChild(messageTime);
         chatContainer.appendChild(messageContainer);
       }
+      let chatWrapper = document.getElementById("chatWrapper");
+      chatWrapper.scrollTop = chatContainer.scrollHeight;
     }
   }
 
@@ -154,32 +167,6 @@ namespace HFUChat {
     currentConversationId = (<HTMLDivElement>(
       (<HTMLElement>_event.currentTarget)
     )).getAttribute("id")!;
-
-    let chatMembers = document.getElementById("chatMembers");
-    // Namen setzen
-    let members = [];
-    if (chatMembers && currentConversations) {
-      for(let elem of currentConversations){
-        if(elem._id == currentConversationId){
-          for(let member of elem.members){
-            for(let user of availableUsers){
-              if(user._id == member){
-                  members.push(user.vname + " " + user.nname);
-              }
-            }
-          }
-        }
-      }
-      console.log(members)
-      chatMembers.innerHTML = "";
-      for (let elem of members){
-        let wrapper: HTMLElement = document.createElement("div");
-        wrapper.innerHTML = elem + " ●";
-        wrapper.className = "chatMemberWrapper"
-        chatMembers.appendChild(wrapper);
-      }      
-    }
-
     showConversations();
     getMessages();
   }
@@ -204,6 +191,29 @@ namespace HFUChat {
         conversation.addEventListener("click", changeConversation);
         wrapper.appendChild(conversation);
         conversationContainer.appendChild(wrapper);
+      }
+      let chatMembers = document.getElementById("chatMembers");
+      // Namen setzen
+      let members = [];
+      if (chatMembers && currentConversations && availableUsers) {
+        for (let elem of currentConversations) {
+          if (elem._id == currentConversationId) {
+            for (let member of elem.members) {
+              for (let user of availableUsers) {
+                if (user._id == member) {
+                  members.push(user.vname + " " + user.nname);
+                }
+              }
+            }
+          }
+        }
+        chatMembers.innerHTML = "";
+        for (let elem of members) {
+          let wrapper: HTMLElement = document.createElement("div");
+          wrapper.innerHTML = elem + " ●";
+          wrapper.className = "chatMemberWrapper"
+          chatMembers.appendChild(wrapper);
+        }
       }
     }
   }
