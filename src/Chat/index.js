@@ -43,11 +43,6 @@ var HFUChat;
         let apiurl = url + "/getUserData" + "?" + query.toString();
         let serverResponse = await fetch(apiurl);
         currentUser = await serverResponse.json();
-        let loggedInUser = document.getElementById("loggedInUser");
-        // Namen setzen
-        if (loggedInUser) {
-            loggedInUser.innerHTML = currentUser.vname + " " + currentUser.nname;
-        }
         await getUserConversations();
         await getUsers();
     }
@@ -144,6 +139,30 @@ var HFUChat;
     function changeConversation(_event) {
         let oldActive = document.getElementsByClassName("active");
         currentConversationId = _event.currentTarget.getAttribute("id");
+        let chatMembers = document.getElementById("chatMembers");
+        // Namen setzen
+        let members = [];
+        if (chatMembers && currentConversations) {
+            for (let elem of currentConversations) {
+                if (elem._id == currentConversationId) {
+                    for (let member of elem.members) {
+                        for (let user of availableUsers) {
+                            if (user._id == member) {
+                                members.push(user.vname + " " + user.nname);
+                            }
+                        }
+                    }
+                }
+            }
+            console.log(members);
+            chatMembers.innerHTML = "";
+            for (let elem of members) {
+                let wrapper = document.createElement("div");
+                wrapper.innerHTML = elem + " ●";
+                wrapper.className = "chatMemberWrapper";
+                chatMembers.appendChild(wrapper);
+            }
+        }
         showConversations();
         getMessages();
     }

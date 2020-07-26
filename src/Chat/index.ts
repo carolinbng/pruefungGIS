@@ -46,14 +46,10 @@ namespace HFUChat {
     let apiurl = url + "/getUserData" + "?" + query.toString();
     let serverResponse: Response = await fetch(apiurl);
     currentUser = await serverResponse.json();
-    let loggedInUser = document.getElementById("loggedInUser");
-    // Namen setzen
-    if (loggedInUser) {
-      loggedInUser.innerHTML = currentUser.vname + " " + currentUser.nname;
-    }
     await getUserConversations();
     await getUsers();
   }
+
 
   async function getUserConversations(): Promise<void> {
     let query: URLSearchParams = new URLSearchParams(<any>{
@@ -158,6 +154,32 @@ namespace HFUChat {
     currentConversationId = (<HTMLDivElement>(
       (<HTMLElement>_event.currentTarget)
     )).getAttribute("id")!;
+
+    let chatMembers = document.getElementById("chatMembers");
+    // Namen setzen
+    let members = [];
+    if (chatMembers && currentConversations) {
+      for(let elem of currentConversations){
+        if(elem._id == currentConversationId){
+          for(let member of elem.members){
+            for(let user of availableUsers){
+              if(user._id == member){
+                  members.push(user.vname + " " + user.nname);
+              }
+            }
+          }
+        }
+      }
+      console.log(members)
+      chatMembers.innerHTML = "";
+      for (let elem of members){
+        let wrapper: HTMLElement = document.createElement("div");
+        wrapper.innerHTML = elem + " ●";
+        wrapper.className = "chatMemberWrapper"
+        chatMembers.appendChild(wrapper);
+      }      
+    }
+
     showConversations();
     getMessages();
   }
